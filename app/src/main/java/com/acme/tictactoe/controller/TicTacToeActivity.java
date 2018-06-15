@@ -42,6 +42,7 @@ public class TicTacToeActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_tictactoe, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -58,13 +59,14 @@ public class TicTacToeActivity extends AppCompatActivity {
         Button button = (Button) v;
 
         String tag = button.getTag().toString();
-        int row = Integer.valueOf(tag.substring(0,1));
-        int col = Integer.valueOf(tag.substring(1,2));
+        Log.d(TAG, "onCellClicked: " + tag);
+        int row = Integer.valueOf(tag.substring(0, 1));
+        int col = Integer.valueOf(tag.substring(1, 2));
         Log.i(TAG, "Click Row: [" + row + "," + col + "]");
 
         Player playerThatMoved = model.mark(row, col);
 
-        if(playerThatMoved != null) {
+        if (playerThatMoved != null) {
             button.setText(playerThatMoved.toString());
             if (model.getWinner() != null) {
                 winnerPlayerLabel.setText(playerThatMoved.toString());
@@ -80,7 +82,7 @@ public class TicTacToeActivity extends AppCompatActivity {
 
         model.restart();
 
-        for( int i = 0; i < buttonGrid.getChildCount(); i++ ) {
+        for (int i = 0; i < buttonGrid.getChildCount(); i++) {
             ((Button) buttonGrid.getChildAt(i)).setText("");
         }
     }
